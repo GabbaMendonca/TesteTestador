@@ -1,24 +1,56 @@
 from command import Command
-from settings import Settings
+from dispatcher import generic
 
-
-s = Settings()
 
 c = Command()
 
-c.set_user('gabba')
-c.set_senha('123')
-c.set_ip('10.10.10.10')
+@generic
+def dispatcher(event):
+    print(f'Não encontrei o comando {event}')
 
-c.terminal_start()
 
-c.terminal_start(False)
+@dispatcher.when(lambda event: 'terminal_start' == event['command'])
+def terminal_start(event):
+    c.set_user(event['user'])
+    c.set_senha(event['senha'])
+    c.set_ip(event['ip'])
+    
+    if event['simulation']:
+        c.terminal_start()
+    else:
+        c.terminal_start(False)
+        
 
-c.select_router_alcatel()
+@dispatcher.when(lambda event: 'select_router_alcatel' == event['command'])
+def select_router_alcatel(event):
+    c.select_router_alcatel()
 
-print(c.terminal_print())
-c.command.telnet()
-print(c.terminal_print())
-c.command.version()
-print(c.terminal_print())
 
+@dispatcher.when(lambda event: 'ra_telnet' == event['command'])
+def router_alcatel_telnet(event):
+    c.command.telnet()
+
+    
+@dispatcher.when(lambda event: 'ra_version' == event['command'])
+def router_alcatel_version(event):
+    c.command.version()
+
+# print(c.terminal_print())
+
+eventStart = {}
+eventStart['command'] = 'terminal_start'
+eventStart['simulation'] = True
+eventStart['user'] = 'gabba'
+eventStart['senha'] = '123'
+eventStart['ip'] = '10.10.10.10'
+
+dispatcher(eventStart)
+
+event = {}
+
+event['command'] = 'select_router_alcatel'
+dispatcher(event)
+event['command'] = 'ra_telnet'
+dispatcher(event)
+event['command'] = 'ra_version'
+dispatcher(event)

@@ -11,14 +11,10 @@ def dispatcher(event):
 
 @dispatcher.when(lambda event: 'terminal_start' == event['command'])
 def terminal_start(event):
-    c.set_user(event['user'])
-    c.set_senha(event['senha'])
-    c.set_ip(event['ip'])
-    
     if event['simulation']:
-        c.terminal_start()
+        c.terminal_start(event['user'], event['senha'], event['ip'])
     else:
-        c.terminal_start(False)
+        c.terminal_start(event['user'], event['senha'], event['ip'], False)
         
 
 @dispatcher.when(lambda event: 'select_router_alcatel' == event['command'])
@@ -38,8 +34,9 @@ def router_alcatel_version(event):
 # print(c.terminal_print())
 
 eventStart = {}
+
 eventStart['command'] = 'terminal_start'
-eventStart['simulation'] = True
+eventStart['simulation'] = False
 eventStart['user'] = 'gabba'
 eventStart['senha'] = '123'
 eventStart['ip'] = '10.10.10.10'

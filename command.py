@@ -22,13 +22,13 @@ class Command():
         else:
             self.modules = modules()
                 
-    def terminal_start(self, simulation=True):    
+    def terminal_start(self, ip, user, pwd, simulation=True):    
         self.terminal = self.modules['Terminal']()
         
         if simulation:
-            self.terminal.start_simulation(self.ip, self.user, self.pwd)
+            self.terminal.start_simulation(ip, user, pwd)
         else:
-            self.terminal.start(self.ip, self.user, self.pwd)
+            self.terminal.start(ip, user, pwd)
     
     def terminal_stop(self):
         self.terminal.stop()
@@ -43,30 +43,21 @@ class Command():
         
     def select_server_alcatel(self):
         self.command = self.modules['ServerAlcatel'](self.terminal)
-        print('[command] selecionado server alcatel')
+        print('[Command] selecionado server alcatel')
     
     def select_server_cisco(self):
         self.command = self.modules['ServerCisco'](self.terminal)
-        print('[command] selecionado server cisco')
+        print('[Command] selecionado server cisco')
     
     def select_router_alcatel(self):
         self.command = self.modules['RouterAlcatel'](self.terminal)
-        print('[command] selecionado router alcatel')
+        print('[Command] selecionado router alcatel')
     
     def select_router_cisco(self):
         self.command = self.modules['RouterCisco'](self.terminal)
-        print('[command] selecionado router cisco')
-    
-    
-    
-    def set_user(self, user):
-        self.user = user
-    
-    def set_senha(self, pwd):
-        self.pwd = pwd        
-    
-    def set_ip(self, ip):
-        self.ip = ip        
+        print('[Command] selecionado router cisco')
+        
+
 
     def set_timeout(self, timeout):
         self.timeout = timeout

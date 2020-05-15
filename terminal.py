@@ -1,31 +1,31 @@
 class Terminal():    
     def start(self, ip_servidor, username, password):
-        print('[terminal] startando ...')
+        print('[Terminal] startando ...')
         self.console = 'Aguardando ...'
-        print(f'[terminal] IP servidor : {ip_servidor}')
-        print(f'[terminal] Username    : {username}')
-        print(f'[terminal] Password    : {password}')
+        print(f'[Terminal] IP servidor : {ip_servidor}')
+        print(f'[Terminal] Username    : {username}')
+        print(f'[Terminal] Password    : {password}')
         
-        print('[terminal] UP ...')
+        print('[Terminal] UP ...')
 
 
     def start_simulation(self, ip_servidor, username, password):
-        print('[terminal sim] startando ...')
+        print('[Terminal sim] startando ...')
         self.console = 'Aguardando ...'
-        print(f'[terminal sim] IP servidor : {ip_servidor}')
-        print(f'[terminal sim] Username    : {username}')
-        print(f'[terminal sim] Password    : {password}')
+        print(f'[Terminal sim] IP servidor : {ip_servidor}')
+        print(f'[Terminal sim] Username    : {username}')
+        print(f'[Terminal sim] Password    : {password}')
         
-        print('[terminal sim] UP ...')
+        print('[Terminal sim] UP ...')
         
     def stop(self):
-        print('[terminal sim] Stopping ...')
-        print('[terminal sim] DOWM ...')
+        print('[Terminal sim] Stopping ...')
+        print('[Terminal sim] DOWM ...')
             
             
     def take_over(self):
-        print('[terminal sim] voce assumiu o terminal ...')
-        print('[terminal sim] aperte "q" para sair...')
+        print('[Terminal sim] voce assumiu o terminal ...')
+        print('[Terminal sim] aperte "q" para sair...')
         
         while True:    
             entrada = input('Escreva <<< ')

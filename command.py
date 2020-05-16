@@ -22,7 +22,7 @@ class Command():
         else:
             self.modules = modules()
                 
-    def terminal_start(self, ip, user, pwd, simulation=True):    
+    def terminal_start(self, ip, user, pwd, simulation):    
         self.terminal = self.modules['Terminal']()
         
         if simulation:

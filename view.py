@@ -34,9 +34,20 @@ def a():
             print('Este não tem ...')
 
 
-
+def configuracoes():
+    pass
 
 com = {
+    'menu inicial': {
+        '1': terminal_start,
+        '2': configuracoes,
+        '0': exit,
+    },
+    'configuracoes': {
+        '1': login,
+        '2': server,
+        '0': exit,
+    },
     'menu inicial': {
         '0': exit,
         '1': terminal_start,

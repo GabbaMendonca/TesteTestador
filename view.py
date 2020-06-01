@@ -2,67 +2,42 @@ import controller
 
 event = {}
 
-event['simulation'] = False
-event['user'] = 'gabba'
-event['senha'] = '123'
-event['ip'] = '10.10.10.10'
+event['simulation'] = True
+event['user'] = ''
+event['senha'] = ''
+event['ip'] = ''
 
-def c():
-    print('Sou a func c')
 
 def terminal_start():
-    controller.terminal_start(event['user'], event['senha'], event['ip'], False)
-
-def select_router_alcatel():
-    controller.select_router_alcatel()
+    controller.terminal_start(event['ip'], event['user'], event['senha'], simulation=event['simulation'])
     
-def router_alcatel_telnet():
-    controller.router_alcatel_telnet()
+def telnet_ip(ip, user, senha):
+    controller.telnet_ip(ip, user, senha)
     
-def router_alcatel_version():
-    controller.router_alcatel_version()
-    
-
-def a():    
-    while True:
-        try:
-            opc = input('Opc : ')
-
-            func = com['menu inicial'][opc]
-            func()
-        except KeyError:
-            print('Este não tem ...')
-
-
-def configuracoes():
-    pass
-
-com = {
-    'menu inicial': {
-        '1': terminal_start,
-        '2': configuracoes,
-        '0': exit,
-    },
-    'configuracoes': {
-        '1': login,
-        '2': server,
-        '0': exit,
-    },
-    'menu inicial': {
-        '0': exit,
-        '1': terminal_start,
-        '2': select_router_alcatel,
-        '3': router_alcatel_telnet,
-        '4': router_alcatel_version,
-        '5': c,
-    }
-}
-
 def iniciar():
+    event['ip'] = input('IP do Server : ')
     event['user'] = input('User : ')
     event['senha'] = input('Senha : ')
-    event['ip'] = input('IP : ')
-    a()
+    
+    terminal_start()
+    
+    while True:
+        ip = input('IP para acesso : ')
+        
+        telnet_ip(ip, event['user'], event['senha'])
+        print('Rodando testes, aguarde ...')
+        controller.testes()
+        controller.terminal_take_over()
+        controller.telnet_ip_logout()
+        
+        while True:
+            opc = input('Deseja testar outro IP [s/n]: ')
+            
+            if opc == 's':
+                break
+            if opc == 'n':
+                exit()
+                
 
 iniciar()
 

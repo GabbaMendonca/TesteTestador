@@ -2,6 +2,8 @@ from terminal import Terminal
 from router import RouterAlcatel, RouterCisco
 from server import ServerAlcatel, ServerCisco
 
+from time import sleep
+
 def modules():
     modules = {}
 
@@ -17,6 +19,7 @@ def modules():
 
 class Command():    
     def __init__(self, modulesExtern: dict = {}):
+        self.timeout = 5
         if modulesExtern:
             self.modules = modulesExtern
         else:
@@ -40,7 +43,61 @@ class Command():
         return f'Executando : "{self.terminal.console}"' 
     
     
+    def telnet_ip(self, ip, user, senha):
+        self.terminal.console.sendline("telnet {0}".format(ip))
         
+        # Digita a senha TACACS
+        self.terminal.console.expect(':', timeout=self.timeout)  # Espera Username
+        self.terminal.console.sendline(user)
+
+        self.terminal.console.expect(':', timeout=self.timeout)  # Espera Senha
+        self.terminal.console.sendline(senha)
+
+        index = self.terminal.console.expect(['>', 'failed'], timeout=self.timeout)
+
+        if index == 0:
+            # Entra em modo privilegiado
+            self.terminal.console.sendline("ena")
+            self.terminal.console.sendline(senha)
+            index = self.terminal.console.expect(['#', '>'], timeout=self.timeout)
+            if index == 0:
+                print("Router Alcatel : Modo Privilegiado UP")
+            if index == 1:
+                print("Router Alcatel : Modo Privilegiado DOWN")
+            return True
+        if index == 1:
+            print('Falha ao fazer login !!!')
+    
+    def telnet_ip_logout(self):
+        self.terminal.console.sendline("logout")
+    
+    '''
+    sh ver | i power | up
+    sh ip bg su | i :
+    sh int | i Last clearing 
+    sh int | i CRC
+    sh ip int br
+    sh arp
+    sh int su
+    '''
+    
+    def teste(self):
+        self.terminal.console.sendline("sh ver | i power | up")
+        sleep(1)
+        self.terminal.console.sendline("sh ip bg su | i :")
+        sleep(1)
+        self.terminal.console.sendline("sh int | i Last clearing")
+        sleep(1)
+        self.terminal.console.sendline("sh int | i CRC")
+        sleep(1)
+        self.terminal.console.sendline("sh ip int br")
+        sleep(1)
+        self.terminal.console.sendline("sh arp")
+        sleep(1)
+        self.terminal.console.sendline("sh int su")
+        sleep(1)
+        print(str(self.terminal.console.before + self.terminal.console.after))
+    
     def select_server_alcatel(self):
         self.command = self.modules['ServerAlcatel'](self.terminal)
         print('[Command] selecionado server alcatel')

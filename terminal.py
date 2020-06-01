@@ -2,13 +2,41 @@ import pexpect
 
 class Terminal():    
     def start(self, ip_servidor, username, password):
-        print('[Terminal] startando ...')
-        self.console = 'Aguardando ...'
-        # print(f'[Terminal] IP servidor : {ip_servidor}')
-        # print(f'[Terminal] Username    : {username}')
-        # print(f'[Terminal] Password    : {password}')
-        
-        print('[Terminal] UP ...')
+        def start(self, ip_servidor, username, password):
+        self.console = pexpect.spawn('ssh ' + str(ip_servidor))
+        try:
+            index = self.console.expect(['Login :', 'autorizados.', '!'], timeout=5)
+
+            if index == 0:
+                self.console.sendline(str(username))
+            elif index == 1:
+                debug("Terminal REAL - OK")
+                return True
+            elif index == 2:
+                error("Verifique se o IP esta correto !!!")
+                return False
+
+            self.console.expect('Senha :', timeout=5)
+            self.console.sendline(str(password))
+
+            index = self.console.expect(['-01>', '!'], timeout=5)
+
+            if index == 0:
+                debug("Terminal REAL - OK")
+                return True
+            elif index == 1:
+                error("Senha ou usuario incorretos !!!")
+                return False
+
+        except pexpect.EOF:
+            print("EOF - TERMINAL : Ops! Algo errado nao esta certo !")
+
+        except pexpect.TIMEOUT:
+            print("TIMEOUT - TERMINAL : Ops! Algo errado nao esta certo !")
+
+        except Exception:
+            print("Ops! O caminho esta incorreto !")
+
 
 
     def start_simulation(self, ip_servidor, username, password):

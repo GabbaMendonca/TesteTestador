@@ -2,15 +2,15 @@ import pexpect
 
 class Terminal():    
     def start(self, ip_servidor, username, password):
-        def start(self, ip_servidor, username, password):
         self.console = pexpect.spawn('ssh ' + str(ip_servidor))
         try:
-            index = self.console.expect(['Login :', 'autorizados.', '!'], timeout=5)
+            index = self.console.expect(['Login :', 'autorizados.', '!'], 
+            timeout=10)
 
             if index == 0:
                 self.console.sendline(str(username))
             elif index == 1:
-                debug("Terminal REAL - OK")
+                print("Terminal REAL - OK")
                 return True
             elif index == 2:
                 error("Verifique se o IP esta correto !!!")
@@ -22,7 +22,7 @@ class Terminal():
             index = self.console.expect(['-01>', '!'], timeout=5)
 
             if index == 0:
-                debug("Terminal REAL - OK")
+                print("Terminal REAL - OK")
                 return True
             elif index == 1:
                 error("Senha ou usuario incorretos !!!")
@@ -34,8 +34,9 @@ class Terminal():
         except pexpect.TIMEOUT:
             print("TIMEOUT - TERMINAL : Ops! Algo errado nao esta certo !")
 
-        except Exception:
-            print("Ops! O caminho esta incorreto !")
+        except Exception as e:
+        	print(e)
+        	print("Ops! O caminho esta incorreto !")
 
 
 

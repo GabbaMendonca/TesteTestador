@@ -28,7 +28,7 @@ def iniciar():
         print('Rodando testes, aguarde ...')
         controller.testes()
         controller.terminal_take_over()
-        controller.telnet_ip_logout()
+        #controller.telnet_ip_logout()
         
         while True:
             opc = input('Deseja testar outro IP [s/n]: ')

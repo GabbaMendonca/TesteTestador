@@ -4,7 +4,8 @@ class Terminal():
     def start(self, ip_servidor, username, password):
         self.console = pexpect.spawn('ssh ' + str(ip_servidor))
         try:
-            index = self.console.expect(['Login :', 'autorizados.', '!'], timeout=10)
+            index = self.console.expect(['Login :', 'autorizados.', '!'], 
+            timeout=10)
 
             if index == 0:
                 self.console.sendline(str(username))
@@ -34,7 +35,8 @@ class Terminal():
             print("TIMEOUT - TERMINAL : Ops! Algo errado nao esta certo !")
 
         except Exception as e:
-            print(e)
+        	print(e)
+        	print("Ops! O caminho esta incorreto !")
 
 
 

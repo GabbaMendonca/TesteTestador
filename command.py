@@ -1,6 +1,5 @@
 from terminal import Terminal
-from router import RouterAlcatel, RouterCisco
-from server import ServerAlcatel, ServerCisco
+from equipamentos import RouterAlcatel, RouterCisco, ServerAlcatel, ServerCisco
 
 from time import sleep
 

@@ -140,3 +140,9 @@ class RouterCisco(RouterBase):
 #         return True
 #     if index == 1:
 #         return False
+
+
+class ServerAlcatel:
+    ...
+class ServerCisco:
+    ...

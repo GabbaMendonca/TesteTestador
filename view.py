@@ -1,22 +1,28 @@
 import controller
+from settings import Server, Login
 
-event = {}
+data = {}
+keys = {}
 
-event['simulation'] = True
-event['user'] = ''
-event['senha'] = ''
-event['ip'] = ''
+data['simulation'] = True
+data['user'] = ''
+data['senha'] = ''
+data['ip'] = ''
 
 
-def terminal_start():
-    return controller.terminal_start(event['ip'], event['user'], event['senha'], simulation=event['simulation'])
+def terminal_start(num_key_login, num_key_server):
+    ip = data['server'][keys['server'][0]]
+    user = keys['login'][0]
+    senha = data['login'][user]
+    
+    return controller.terminal_start(ip, user, senha, simulation=data['simulation'])
 
 # def telnet_ip(ip, user, senha):
 def telnet_ip():
         while True:
             ip = input('IP para acesso : ')
             
-            controller.telnet_ip(ip, event['user'], event['senha'])
+            controller.telnet_ip(ip, data['user'], data['senha'])
             print('Rodando testes, aguarde ...')
             controller.testes()
             controller.terminal_take_over()
@@ -40,14 +46,36 @@ def telnet_ip():
             
         
 def iniciar():
-    while True:
-        event['ip'] = input('IP do Server : ')
-        event['user'] = input('User : ')
-        event['senha'] = input('Senha : ')
+    
+    # ----- CARREGANDO/REGISTARNDO SERVER -----    
+    
+    server = Server()
+    data['server'] = server.get_server()
+    
+    if not data['server']:
+        ip = input('IP do Server : ')
+        server.new_server('1', ip)
+        data['server'] = server.get_server()
         
-        if terminal_start():
-            controller.terminal_take_over()
-            break
+
+    # ----- CARREGANDO/REGISTARNDO LOGIN -----
+
+    login = Login()
+    data['login'] = login.get_login()
+
+    if not data['login']:
+        user = input('User : ')
+        senha = input('Senha : ')
+        login.new_login(user, senha)
+        data['login'] = login.get_login()
+        
+    keys['server'] = list(data['server'])
+    keys['login'] = list(data['login'])
+            
+    if terminal_start(0,0):
+        controller.terminal_take_over()
+    else:
+        raise('Problemas ao fazer login')
             
     
     while True:

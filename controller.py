@@ -4,7 +4,7 @@ from command import Command
 c = Command()
 
 def terminal_start(ip, user, senha, simulation=True):
-    c.terminal_start(ip, user, senha, simulation)
+    return c.terminal_start(ip, user, senha, simulation)
 
 def terminal_take_over():
     c.terminal_take_over()

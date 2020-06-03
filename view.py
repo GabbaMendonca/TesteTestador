@@ -9,35 +9,67 @@ event['ip'] = ''
 
 
 def terminal_start():
-    controller.terminal_start(event['ip'], event['user'], event['senha'], simulation=event['simulation'])
+    return controller.terminal_start(event['ip'], event['user'], event['senha'], simulation=event['simulation'])
+
+# def telnet_ip(ip, user, senha):
+def telnet_ip():
+        while True:
+            ip = input('IP para acesso : ')
+            
+            controller.telnet_ip(ip, event['user'], event['senha'])
+            print('Rodando testes, aguarde ...')
+            controller.testes()
+            controller.terminal_take_over()
+            
+            while True:
+                opc = input(
+    '''
     
-def telnet_ip(ip, user, senha):
-    controller.telnet_ip(ip, user, senha)
+    (9) >>> Voltar ao Terminal
+    (0) >>> Logout
     
+    '''
+                )
+            
+                if opc == '9':
+                    controller.terminal_take_over()
+                if opc == '0':
+                    controller.telnet_ip_logout()
+                    return
+            
+            
+        
 def iniciar():
-    event['ip'] = input('IP do Server : ')
-    event['user'] = input('User : ')
-    event['senha'] = input('Senha : ')
-    
-    terminal_start()
+    while True:
+        event['ip'] = input('IP do Server : ')
+        event['user'] = input('User : ')
+        event['senha'] = input('Senha : ')
+        
+        if terminal_start():
+            controller.terminal_take_over()
+            break
+            
     
     while True:
-        ip = input('IP para acesso : ')
-        
-        telnet_ip(ip, event['user'], event['senha'])
-        print('Rodando testes, aguarde ...')
-        controller.testes()
-        controller.terminal_take_over()
-        #controller.telnet_ip_logout()
-        
-        while True:
-            opc = input('Deseja testar outro IP [s/n]: ')
+        opc = input(
+    '''
             
-            if opc == 's':
-                break
-            if opc == 'n':
-                exit()
-                
+    (1) >>> Telnet no IP
+    (9) >>> Voltar ao Terminal
+    (0) <<< Sair
+    
+    '''
+        )
+        
+        if opc == '1':
+            telnet_ip()
+        if opc == '9':
+            controller.terminal_take_over()
+        if opc == '0':
+            exit()
+
+
+          
 
 iniciar()
 

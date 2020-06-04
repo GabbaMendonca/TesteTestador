@@ -76,7 +76,7 @@ def server():
         opc = input(
     '''
             
-    (1) >>> Mostrar Server
+    (1) >>> Mostar/Selecionar Server
     (2) >>> Editar Server 
     (3) >>> Criar Server 
     (4) >>> Deletar Server
@@ -89,12 +89,16 @@ def server():
         if opc == '1':
             
             print(data['server'])
-                        
-            name_server = input('Escreva o nome do server que deseja selecionar : ')
+                
+            name_server = input('Escreva o nome do server que deseja selecionar \nou "q" para sair : ')
             
-            try:
-                data['server_select'] = data['server'][name_server]
-            except KeyError:
+            if name_server == 'q':
+                return
+                
+            if name_server in keys['server']:
+                data['server_select'] = name_server
+                print('server selecionado : {}'.format(data['server_select']))
+            else:
                 print('server errado ou não exite !!!')
             
         if opc == '2':
@@ -152,7 +156,7 @@ def login():
         opc = input(
     '''
             
-    (1) >>> Selecionar Login
+    (1) >>> Mostar/Selecionar Login
     (2) >>> Editar Login 
     (3) >>> Criar Login 
     (4) >>> Deletar Login 
@@ -164,13 +168,18 @@ def login():
         
         if opc == '1':
             
-            print(data['login'])
+            # print(data['login'])
+            print(keys['login'])
             
-            name_user = input('Escreva o nome do user que deseja selecionar : ')
+            name_user = input('Escreva o nome do user que deseja selecionar \nou "q" para sair : ')
             
-            try:
-                data['login_select'] = data['login'][name_user]
-            except KeyError:
+            if name_user == 'q':
+                return
+                
+            if name_user in keys['login']:
+                data['login_select'] = name_user
+                print('user selecionado : {}'.format(data['login_select']))
+            else:
                 print('user errado ou não exite !!!')
             
             
@@ -253,14 +262,14 @@ def configuracoes():
         opc = input(
     '''
             
-    (1) >>> Server
-    (2) >>> Login
+    (1) >>> Server ->  {0}
+    (2) >>> Login  ->  {1}
     
-    (3) >>> Simulação
+    (3) >>> Simulação ->  {2}
     
     (0) <<< Voltar
     
-    '''
+    '''.format(data['server'][data['server_select']], data['login_select'], data['simulation'])
         )
         
         if opc == '1':
@@ -296,7 +305,6 @@ def iniciar():
     
     carregar_dados()
     tela_inicial()
-    import pdb; pdb.set_trace()            
     if terminal_start(data['login_select'], data['server_select']):
         controller.terminal_take_over()
     else:

@@ -22,7 +22,7 @@ def telnet_ip():
     while True:
         ip = input('IP para acesso : ')
         
-        controller.telnet_ip(ip, data['user'], data['senha'])
+        controller.telnet_ip(ip, data['login_select'], data['senha'][data['login_select']])
         print('Rodando testes, aguarde ...')
         controller.testes()
         controller.terminal_take_over()

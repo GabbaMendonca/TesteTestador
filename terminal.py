@@ -76,15 +76,16 @@ class Terminal():
         except pexpect.TIMEOUT:
             print("TIMEOUT - TERMINAL : Ops! Algo errado nao esta certo !")
 
-        except Exception:
-            print("Ops! O caminho esta incorreto !")
+        except Exception as e:
+            print(e)
+            raise("Ops! O caminho esta incorreto !")
         
     def stop(self):
         try:
             self.console.sendline('exit')
             self.console.expect('closed', timeout=10)
         except pexpect.TIMEOUT:
-            print("TIMEOUT - TERMINAL : O terminal não confirmou qeu foi fechado !!!")
+            print("TIMEOUT - TERMINAL : O terminal não confirmou que foi fechado !!!")
         except Exception as e:
             print(e)
             

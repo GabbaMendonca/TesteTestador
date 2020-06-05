@@ -4,7 +4,7 @@ from settings import Server, Login
 data = {}
 keys = {}
 
-data['simulation'] = True
+data['simulation'] = False
 data['login_select'] = 'oi369932'
 data['server_select'] = '1'
 
@@ -258,28 +258,7 @@ def simulacao():
     
 
 def configuracoes():
-    while True:
-        opc = input(
-    '''
-            
-    (1) >>> Server ->  {0}
-    (2) >>> Login  ->  {1}
-    
-    (3) >>> Simulação ->  {2}
-    
-    (0) <<< Voltar
-    
-    '''.format(data['server'][data['server_select']], data['login_select'], data['simulation'])
-        )
-        
-        if opc == '1':
-            server()
-        if opc == '2':
-            login()
-        if opc == '3':
-            simulacao()
-        if opc == '0':
-            return
+    ...
             
 
 def terminal_stop():
@@ -291,14 +270,25 @@ def tela_inicial():
     '''
             
     (1) >>> Iniciar
-    (9) >>> Configurações
+    
+    (2) >>> Server ->  {0}
+    (3) >>> Login  ->  {1}
+    
+    (4) >>> Simulação ->  {2}
+    
     (0) <<< Sair
     
-    '''
+    '''.format(data['server'][data['server_select']], data['login_select'], data['simulation'])
         )
         
         if opc == '1':
             return
+        if opc == '2':
+            server()
+        if opc == '3':
+            login()
+        if opc == '4':
+            simulacao()
         if opc == '9':
             configuracoes()
         if opc == '0':

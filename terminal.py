@@ -4,13 +4,13 @@ class Terminal():
     def start(self, ip_servidor, username, password):
         self.console = pexpect.spawn('ssh ' + str(ip_servidor))
         try:
-            index = self.console.expect(['Login :', 'autorizados.', '!'], 
-            timeout=10)
+            index = self.console.expect(['Login :', 'autorizados.', 'Connection timed out'], 
+            timeout=30)
 
             if index == 0:
                 self.console.sendline(str(username))
             elif index == 1:
-                print("Terminal REAL - OK")
+                print("Terminal inicializado com sucesso !")
                 return True
             elif index == 2:
                 print("Verifique se o IP esta correto !!!")
@@ -19,10 +19,10 @@ class Terminal():
             self.console.expect('Senha :', timeout=5)
             self.console.sendline(str(password))
 
-            index = self.console.expect(['-01>', '!'], timeout=5)
+            index = self.console.expect(['-01>', '!'], timeout=10)
 
             if index == 0:
-                print("Terminal REAL - OK")
+                print("Terminal inicializado com sucesso !")
                 return True
             elif index == 1:
                 print("Senha ou usuario incorretos !!!")
@@ -30,19 +30,19 @@ class Terminal():
 
         except pexpect.EOF:
             print("EOF - TERMINAL : Ops! Algo errado nao esta certo !")
+            return False
 
         except pexpect.TIMEOUT:
-            print("TIMEOUT - TERMINAL : Ops! Algo errado nao esta certo !")
+            print("TIMEOUT - TERMINAL : Ops! Algo errado nao esta certo ! O terminal parou de responder ...")
+            return False
 
         except Exception as e:
-        	print(e)
-        	print("Ops! O caminho esta incorreto !")
-
+            print(e)
+            return False
 
 
     def start_simulation(self, ip_servidor, username, password):
         self.console = pexpect.spawn("python router_de_testes/router_testes.py")
-
         try:
             self.console.sendline('ssh ' + ip_servidor)
             index = self.console.expect(['Login :', '-01>', '!'], timeout=5) # TODO : Pendente verificar erro do ip do server estiver errado
@@ -76,18 +76,26 @@ class Terminal():
         except pexpect.TIMEOUT:
             print("TIMEOUT - TERMINAL : Ops! Algo errado nao esta certo !")
 
-        except Exception:
-            print("Ops! O caminho esta incorreto !")
+        except Exception as e:
+            print(e)
+            raise("Ops! O caminho esta incorreto !")
         
     def stop(self):
-        print('[Terminal sim] Stopping ...')
-        print('[Terminal sim] DOWM ...')
+        try:
+            self.console.sendline('exit')
+            self.console.expect('closed', timeout=10)
+        except pexpect.TIMEOUT:
+            print("TIMEOUT - TERMINAL : O terminal não confirmou que foi fechado !!!")
+        except Exception as e:
+            print(e)
             
             
     def take_over(self):
         try:
-            print("\n *** Terminal em modo interativo *** \n")
-            self.console.interact(escape_character=chr(95))
+            print("\n *** Terminal em modo interativo *** \n\n Digite ESC para sair do modo interativo \n")
+            self.console.interact(escape_character=chr(27))
+            # print("\n *** Terminal em modo interativo *** \n\n Digite ( _ -> underline ) para sair do modo interativo \n")
+            # self.console.interact(escape_character=chr(95))
 
         except pexpect.EOF:
             print("EOF : Ops! Algo errado não esta certo !")

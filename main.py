@@ -282,6 +282,9 @@ def configuracoes():
             return
             
 
+def terminal_stop():
+    controller.terminal_stop()
+
 def tela_inicial():
     while True:
         opc = input(
@@ -299,7 +302,7 @@ def tela_inicial():
         if opc == '9':
             configuracoes()
         if opc == '0':
-            exit()
+            terminal_stop()
         
 def iniciar():
     

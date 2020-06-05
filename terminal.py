@@ -80,8 +80,13 @@ class Terminal():
             print("Ops! O caminho esta incorreto !")
         
     def stop(self):
-        print('[Terminal sim] Stopping ...')
-        print('[Terminal sim] DOWM ...')
+        try:
+            self.console.sendline('exit')
+            self.console.expect('closed', timeout=10)
+        except pexpect.TIMEOUT:
+            print("TIMEOUT - TERMINAL : O terminal não confirmou qeu foi fechado !!!")
+        except Exception as e:
+            print(e)
             
             
     def take_over(self):

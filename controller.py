@@ -6,6 +6,9 @@ c = Command()
 def terminal_start(ip, user, senha, simulation=True):
     return c.terminal_start(ip, user, senha, simulation)
 
+def terminal_stop():
+    return c.terminal_stop()
+
 def terminal_take_over():
     c.terminal_take_over()
 

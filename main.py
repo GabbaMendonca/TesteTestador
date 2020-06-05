@@ -5,8 +5,7 @@ data = {}
 keys = {}
 
 data['simulation'] = False
-data['login_select'] = 'oi369932'
-data['server_select'] = '1'
+data['terminal_status'] = False
 
 
 
@@ -69,6 +68,9 @@ def carregar_dados():
         
     keys['server'] = list(data['server'])
     keys['login'] = list(data['login'])
+        
+    data['login_select'] = keys['login'][0] #TODO : caregar do arquivo de configurações
+    data['server_select'] = keys['server'][0] #TODO : caregar do arquivo de configurações
 
 
 def server():
@@ -292,13 +294,17 @@ def tela_inicial():
         if opc == '9':
             configuracoes()
         if opc == '0':
-            terminal_stop()
+            if data['terminal_status']:
+                terminal_stop()
+            else:
+                exit()
         
 def iniciar():
     
     carregar_dados()
     tela_inicial()
     if terminal_start(data['login_select'], data['server_select']):
+        data['terminal_status'] = True
         controller.terminal_take_over()
     else:
         raise('Problemas ao fazer login')

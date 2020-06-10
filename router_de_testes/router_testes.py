@@ -1,9 +1,9 @@
 """
-ssh 10.121.2.8
-Login : oi369932
+ssh 10.10.10.10
+Login : admin
 Senha : 1234
 
-ssh cen-ce-ser-a01
+ssh aa-bb-cc-a01
 """
 
 
@@ -128,6 +128,12 @@ Sending 500, 1500-byte ICMP Echos to 10.10.10.10, timeout is 2 seconds:""")
     porcentagem = round( pacotes_enviados * 100 / repetir )
     print('\nSuccess rate is {0} percent ({1}/{2}), round-trip min/avg/max = 68/70/204 ms'
           .format(porcentagem, pacotes_enviados, repetir))
+
+def __sh_ver():
+    ...
+    
+def __sh_ip_bg_su():
+    ...
 
 
 # ===================================================================
@@ -263,156 +269,15 @@ Neighbor
 
 
 
-def localizar_serial_2():
-    print("5/2/3.1.4.3.2  PAA PAA VM 5010511; WAL MART BRASIL LTDA;TC VPN VIP")
-
-def show_port_2_associations():
-    print("""
-============================================================================
-Interface Table
-============================================================================
-Router/ServiceId                Name                            Encap Val
-----------------------------------------------------------------------------
-Service: 7804                   PAA_5010511                     
-----------------------------------------------------------------------------
-Interfaces
-============================================================================""")
-
-def show_port_2():
-    print("""
-============================================================================
-TDM DS0 Chan Group
-============================================================================
-Description        : PAA PAA VM 5010511; WAL MART BRASIL LTDA;TC VPN VIP
-Interface          : 5/2/3.1.4.3.2           
-TimeSlots          : 2-17
-Speed              : 64                      CRC                  : 16
-Admin Status       : up                      Oper Status          : down
-BER SF Link Down   : disabled                 """)
-
-def show_port_2_ppp():
-    print("""
-============================================================================
-PPP Protocols for 1/1/1.2.3.4.5
-============================================================================
-Protocol  State      Last Change         Restart Count   Last Cleared
-----------------------------------------------------------------------------
-lcp       ack sent   10/23/2014 07:16:15         29      09/10/2014 03:57:33
-ipcp      initial    10/23/2014 04:38:07         28      09/10/2014 03:57:33
-mplscp    initial    08/01/2014 02:52:49          0      09/10/2014 03:57:33
-bcp       initial    08/01/2014 02:52:49          0      09/10/2014 03:57:33
-osicp     initial    08/01/2014 02:52:49          0      09/10/2014 03:57:33
-ipv6cp    initial    08/01/2014 02:52:49          0      09/10/2014 03:57:33
-============================================================================
-
-============================================================================
-PPP Statistics
-============================================================================
-Local Mac address  : 7c:20:64:59:3d:df  Remote Mac address :                  
-Local Magic Number : 0x0                Remote Magic Number: 0x0
-Local IPv4 address : 100.126.88.93      Remote IPv4 address: 0.0.0.0 (*****)
-Local IPv6 address : ::
-Remote IPv6 address: ::
-Line Monitor Method: keepalive
-Keepalive statistics
-
-Request interval   : 10           Threshold exceeded : 12
-Drop Count         : 3            In packets         : 364149
-Time to link drop  : 00h00m30s    Out packets        : 364195
-Last cleared time  : 09/10/2014 03:57:33
-
-PPP Header Compression
- ACFC              : Disabled     PFC                : Disabled
-============================================================================
-""")
 
 
 
-def monitor_port():
-    print("""
-===============================================================================
-Monitor statistics for Port 1/1/1.2.3.4.5
-===============================================================================
-                                                   Input                 Output
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
-At time t = 0 sec (Base Statistics)
--------------------------------------------------------------------------------
-Octets                                             38544                  33070
-Packets                                              843                    855
-Errors                                                 0                      0
 
--------------------------------------------------------------------------------
-At time t = 3 sec (Mode: Delta)
--------------------------------------------------------------------------------
-Octets                                                32                     32
-Packets                                                2                      2
-Errors                                                 0                      0
 
--------------------------------------------------------------------------------
-At time t = 6 sec (Mode: Delta)
--------------------------------------------------------------------------------
-Octets                                                 0                      0
-Packets                                                0                      0
-Errors                                                 0                      0
 
--------------------------------------------------------------------------------
-At time t = 9 sec (Mode: Delta)
--------------------------------------------------------------------------------
-Octets                                                 0                      0
-Packets                                                0                      0
-Errors                                                 0                      0
 
--------------------------------------------------------------------------------
-At time t = 12 sec (Mode: Delta)
--------------------------------------------------------------------------------
-Octets                                                14                     14
-Packets                                                1                      1
-Errors                                                 0                      0
 
--------------------------------------------------------------------------------
-At time t = 15 sec (Mode: Delta)
--------------------------------------------------------------------------------
-Octets                                                18                     18
-Packets                                                1                      1
-Errors                                                 0                      0
 
--------------------------------------------------------------------------------
-At time t = 18 sec (Mode: Delta)
--------------------------------------------------------------------------------
-Octets                                                 0                      0
-Packets                                                0                      0
-Errors                                                 0                      0
-
--------------------------------------------------------------------------------
-At time t = 21 sec (Mode: Delta)
--------------------------------------------------------------------------------
-Octets                                                14                     14
-Packets                                                1                      1
-Errors                                                 0                      0
-
--------------------------------------------------------------------------------
-At time t = 24 sec (Mode: Delta)
--------------------------------------------------------------------------------
-Octets                                                18                     18
-Packets                                                1                      1
-Errors                                                 0                      0
-
--------------------------------------------------------------------------------
-At time t = 27 sec (Mode: Delta)
--------------------------------------------------------------------------------
-Octets                                                 0                      0
-Packets                                                0                      0
-Errors                                                 0                      0
-
--------------------------------------------------------------------------------
-At time t = 30 sec (Mode: Delta)
--------------------------------------------------------------------------------
-Octets                                                14                     14
-Packets                                                1                      1
-Errors                                                 0                      0
-
-===============================================================================""")
 
 def show_port_AAA():
     print("""
@@ -510,8 +375,203 @@ Symbol Errors    :                   0  Int MAC Rx Errs  :                   0
 In Pause Frames  :                   0  Out Pause Frames :                   0
 ===============================================================================""")
 
-def localizar_serial_AAA():
+def localizar_serial_BBB():
     print("1/1/11         AAA AAA VM 1234567; NOME DA EMPRESA; TC VPN")
+
+
+
+
+# ===================================================================
+
+# PE DE BORDA ALCATEL - COMANDOS DO AAA 1234567
+
+# ===================================================================
+
+def localizar_serial():
+    print("1/1/1.2.3.4.5  PAA PAA VM 5010511; NOME DA EMPRESA;TC VPN VIP")
+
+def show_port():
+    print("""
+============================================================================
+TDM DS0 Chan Group
+============================================================================
+Description        : AAA AAA VM 1234567; NOME DA EMPRESA;TC VPN VIP
+Interface          : 1/1/1.2.3.4.5           
+TimeSlots          : 2-17
+Speed              : 64                      CRC                  : 16
+Admin Status       : up                      Oper Status          : down
+BER SF Link Down   : disabled                 
+Last State Change  : 06/08/2020 07:46:22     Chan-Grp IfIndex     : 708939031
+Configured Address : 1c:20:60:5o:1d:df
+Hardware Address   : 1c:20:60:5o:1d:df
+
+Configured mode    : access                  Encap Type           : ipcp
+Admin MTU          : 1502                    Oper MTU             : 1502
+Scramble           : false
+Physical Link      : yes                     Bundle Number        : none
+Idle Cycle Flags   : flags                   Load-balance-algo    : Default
+Payload Fill Type  : n/a                     Payload Pattern      : N/A
+Signal Fill Type   : n/a                     Signal Pattern       : N/A
+Ing. Pool % Rate   : 100                     Egr. Pool % Rate     : 100
+Egr. Sched. Pol    : N/A
+===============================================================================
+
+===============================================================================
+Traffic Statistics
+===============================================================================
+                                                   Input                 Output
+-------------------------------------------------------------------------------
+Octets                                      789428382411          1159403100583
+Packets                                       2628475049             4205179573
+Errors                                            363900                      0
+
+===============================================================================
+Port Statistics
+===============================================================================
+                                                   Input                 Output
+-------------------------------------------------------------------------------
+Packets                                       2628475049             4205179573
+Discards                                               0                      0
+Unknown Proto Discards                                 0
+===============================================================================""")
+
+def monitor_port():
+    print("""
+===============================================================================
+Monitor statistics for Port 1/1/1.2.3.4.5
+===============================================================================
+                                                   Input                 Output
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+At time t = 0 sec (Base Statistics)
+-------------------------------------------------------------------------------
+Octets                                             38544                  33070
+Packets                                              843                    855
+Errors                                                 0                      0
+
+-------------------------------------------------------------------------------
+At time t = 3 sec (Mode: Delta)
+-------------------------------------------------------------------------------
+Octets                                                32                     32
+Packets                                                2                      2
+Errors                                                 0                      0
+
+-------------------------------------------------------------------------------
+At time t = 6 sec (Mode: Delta)
+-------------------------------------------------------------------------------
+Octets                                                 0                      0
+Packets                                                0                      0
+Errors                                                 0                      0
+
+-------------------------------------------------------------------------------
+At time t = 9 sec (Mode: Delta)
+-------------------------------------------------------------------------------
+Octets                                                 0                      0
+Packets                                                0                      0
+Errors                                                 0                      0
+
+-------------------------------------------------------------------------------
+At time t = 12 sec (Mode: Delta)
+-------------------------------------------------------------------------------
+Octets                                                14                     14
+Packets                                                1                      1
+Errors                                                 0                      0
+
+-------------------------------------------------------------------------------
+At time t = 15 sec (Mode: Delta)
+-------------------------------------------------------------------------------
+Octets                                                18                     18
+Packets                                                1                      1
+Errors                                                 0                      0
+
+-------------------------------------------------------------------------------
+At time t = 18 sec (Mode: Delta)
+-------------------------------------------------------------------------------
+Octets                                                 0                      0
+Packets                                                0                      0
+Errors                                                 0                      0
+
+-------------------------------------------------------------------------------
+At time t = 21 sec (Mode: Delta)
+-------------------------------------------------------------------------------
+Octets                                                14                     14
+Packets                                                1                      1
+Errors                                                 0                      0
+
+-------------------------------------------------------------------------------
+At time t = 24 sec (Mode: Delta)
+-------------------------------------------------------------------------------
+Octets                                                18                     18
+Packets                                                1                      1
+Errors                                                 0                      0
+
+-------------------------------------------------------------------------------
+At time t = 27 sec (Mode: Delta)
+-------------------------------------------------------------------------------
+Octets                                                 0                      0
+Packets                                                0                      0
+Errors                                                 0                      0
+
+-------------------------------------------------------------------------------
+At time t = 30 sec (Mode: Delta)
+-------------------------------------------------------------------------------
+Octets                                                14                     14
+Packets                                                1                      1
+Errors                                                 0                      0
+
+===============================================================================""")
+
+def show_port_associations():
+    print("""
+============================================================================
+Interface Table
+============================================================================
+Router/ServiceId                Name                            Encap Val
+----------------------------------------------------------------------------
+Service: 2020                   AAA_124567                     
+----------------------------------------------------------------------------
+Interfaces
+============================================================================""")
+
+def show_port_ppp():
+    print("""
+
+===============================================================================
+PPP Protocols for 7/2/2.2.4.1.1
+===============================================================================
+Protocol  State         Last Change         Restart Count   Last Cleared
+-------------------------------------------------------------------------------
+lcp       opened        06/08/2020 17:07:59         70      01/25/2020 12:56:36
+ipcp      opened        06/08/2020 17:08:00         70      01/25/2020 12:56:36
+mplscp    initial       05/10/2020 16:11:40          0      01/25/2020 12:56:36
+bcp       initial       05/10/2020 16:11:40          0      01/25/2020 12:56:36
+osicp     initial       05/10/2020 16:11:40          0      01/25/2020 12:56:36
+ipv6cp    initial       05/10/2020 16:11:40          0      01/25/2020 12:56:36
+===============================================================================
+
+===============================================================================
+PPP Statistics
+===============================================================================
+Local Mac address  : 24:af:4a:a9:ee:f2  Remote Mac address :
+Local Magic Number : 0x6ca80e5c         Remote Magic Number: 0xecee0bdd
+Local IPv4 address : 100.100.0.9       Remote IPv4 address: 100.100.0.10
+Local IPv6 address : ::
+Remote IPv6 address: ::
+
+Line Monitor Method: keepalive
+
+Keepalive statistics
+
+Request interval   : 10           Threshold exceeded : 0
+Drop Count         : 3            In packets         : 1169266
+Time to link drop  : 00h00m30s    Out packets        : 1169270
+Last cleared time  : 01/25/2020 12:56:36
+
+PPP Header Compression
+ ACFC              : Disabled     PFC                : Disabled
+===============================================================================
+""")
+
 
 
 
@@ -552,23 +612,36 @@ admin@aa-bb-cc-a01's password: """)
                 # TESTES DO CIRCUTO AAA 1234567
                 
                 if entrada == "show port description | match 1234567":
-                    localizar_serial_AAA()
+                    localizar_serial()
                     
+                if entrada == "show port 1/1/1.2.3.4.5":
+                    show_port()
+                
+                if entrada == "show port 1/1/1.2.3.4.5 ppp":
+                    show_port_ppp()
+
+                if entrada == "show port 1/1/1.2.3.4.5 associations":
+                    show_port_associations()
+
                 if entrada == "show port 1/1/11":
-                    show_port_AAA()
+                    ...
+                    # show_port_AAA()
+
                 
                 if entrada == "monitor port 1/1/11 interval 3":
                     monitor_port()
                     
                 if entrada == "telnet router 2020 10.10.10.10" or entrada == "n":
                     print("Trying 10.10.10.10 ... ")
-                    cpe()
+                    # cpe()
                     
                 if entrada == "ping router 2020 10.10.10.10":
-                    __ping()
+                    ...
+                    # __ping()
                     
                 if entrada == "show router 2020 bgp summary neighbor 10.10.10.10":
-                    bgp()
+                    ...
+                    # bgp()
                     
                 if entrada == "ena":
                     pass
@@ -582,8 +655,20 @@ admin@aa-bb-cc-a01's password: """)
                 #     show_port_2()
                 # if entrada == "show port 1/1/1.2.3.4.5 ppp":
                 #     show_port_2_ppp()
-                # if entrada == "show port 1/1/1.2.3.4.5 associations":
-                #     show_port_2_associations()
+
+
+                if entrada == "help":
+                    print("""
+    Este é um PE DE BORDA alcatel,
+    aqui temos varios comnados que podem ser executados,
+    listaremos os mais basicos.
+
+    DIGITE :
+        show port description | match 1234567 -> mostrar a serial do circuito.
+
+        show port 1/1/1.2.3.4.5 -> 
+                    """)
+
 
 
 
@@ -594,8 +679,10 @@ admin@aa-bb-cc-a01's password: """)
 
 # ===================================================================
 
-def servidor_de_testes():
+from router_de_testes import pe_de_borda_alcatel
 
+def servidor_de_testes():
+    
     login = input("Login : ")
     senha = input("Senha : ")
 
@@ -634,10 +721,13 @@ Acesso restrito a usuarios autorizados.
 
         if entrada == "exit":
             break
+
         if entrada == "ssh aa-bb-cc-a01" or entrada == "n":
             pe_alcatel()
+
         if entrada == "telnet 10.10.10.10":
             cpe()
+
         if entrada == "help":
             print("""
     Este é o server de testes da OI,
@@ -674,49 +764,58 @@ Acesso restrito a usuarios autorizados.
 
 
 
-
 # ===================================================================
 
 # MINHA MAQUINA LOCAL
 
 # ===================================================================
 
-print('''
-    Bem-Vindo ao simulador de testes.
-    
-    Digite o comando "help" sempre que
-    tiver divuda de quais comandos utilizar ...
-      ''')
+def minha_maquina():
+    print('''
+        Bem-Vindo ao simulador de testes.
+        
+        Digite o comando "help" sempre que
+        tiver divuda de quais comandos utilizar ...
+        ''')
 
-while True:
-    entrada = input("minha_maquina> ")
+    while True:
+        entrada = input("minha_maquina> ")
 
-    if entrada == "exit":
-        break
-    if entrada == "ssh 10.10.10.10" or entrada == "n":
-        servidor_de_testes()
-    if entrada == "cpe":
-        cpe()
-    if entrada == "help":
-        print("""              
-    Este é o terminal da sua maquina,
-    temos que acesssar o server de testes na rede da OI
-    para executar os testes.
-    
-    Vamos fazer usando o protocolo SSH.
-    
-    DIGITE :
-    
-        ssh 10.10.10.10
-    
-    O ip 10.10.10.10 é ficticio, assim como todos os IP's.
-    
-        O login padrão é 'admin'
-        A senha padrão é '1234'
-    
-    ATALHOS (Só funcinam no simulador !):
-    
-        Digite 'n' para ir direto ao server de testes.
-        Digite 'cpe' para ir direto a um router alcatel.
-              
-              """)
+        if entrada == "exit":
+            break
+        if entrada == "ssh 10.10.10.10" or entrada == "n":
+            servidor_de_testes()
+        if entrada == "cpe":
+            cpe()
+        if entrada == "help":
+            print("""              
+        Este é o terminal da sua maquina,
+        temos que acesssar o server de testes na rede da OI
+        para executar os testes.
+        
+        Vamos fazer usando o protocolo SSH.
+        
+        DIGITE :
+        
+            ssh 10.10.10.10
+        
+        O ip 10.10.10.10 é ficticio, assim como todos os IP's.
+        
+            O login padrão é 'admin'
+            A senha padrão é '1234'
+        
+        ATALHOS (Só funcinam no simulador !):
+        
+            Digite 'n' para ir direto ao server de testes.
+            Digite 'cpe' para ir direto a um router alcatel.
+                
+                """)
+
+
+
+
+
+
+
+
+

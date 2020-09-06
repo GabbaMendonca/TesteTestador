@@ -13,7 +13,6 @@ def carregar_dados():
         settings.server.new_server('1', ip)
         server = settings.server.get_server()
         
-
     # ----- CARREGANDO/REGISTARNDO LOGIN -----
 
     login = settings.login.get_login()
@@ -24,5 +23,8 @@ def carregar_dados():
         settings.login.new_login(user, senha)
         login = settings.login.get_login()
 
+    # ----- CARREGANDO STATUS SIMULAÇÃO -----
 
-    return login, server
+    simulation = settings.simulation.get_status()
+
+    return login, server, simulation

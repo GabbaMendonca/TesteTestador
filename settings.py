@@ -1,124 +1,78 @@
-from dictionary import new, update, delete, get
+from dictionary import Dictionary
 
 from time import sleep
 
-class _Login():
-    def new_login(self, user : str, password : str):
-        "Cria um novo login"
-        settings = get('settings')    
-
-        if False != settings:
-            if 'login' in settings:
-                settings['login'][user] = password
-                return update('settings', 'login', settings['login'])
-            else:
-                settings['login'] = {user : password}
-                return update('settings', 'login', settings['login'])
-        
-        if new('settings'):
-            sleep(1)
-            login = {}
-            login[user] = password
-            return update('settings', 'login', login)
-        
-    def get_login(self):
-        "Retorna um dict com todos os logins e senha"
-        settings = get('settings')
-
-        if 'login' in settings:
-            return settings['login']
-        else: 
-            return False
-
-    def update_login(self, user, password): 
-        "Atualiza um login"
-        settings = get('settings')
-        
-        if False != settings:
-            settings['login'][user] = password
-            return update('settings', 'login', settings['login'])
-        
-    def deletar_login(self, user):
-        "Deleta um login"
-        settings = get('settings')
-        
-        if False != settings:
-            try:
-                del settings['login'][user]
-                return update('settings', 'login', settings['login'])
-            except:
-                return False
-
 class _Server():
-    def new_server(self, name_server: str, ip_server: str):
-        "Cria um novo server"
-        settings = get('settings')
-        
-        if False != settings:
-            if 'server' in settings:
-                settings['server'][name_server] = ip_server
-                return update('settings', 'server', settings['server'])
-            else:
-                settings['server'] = {name_server : ip_server}
-                return update('settings', 'server', settings['server'])
-            
-        
-        if new('settings'):            
-            sleep(1)
-            server = {}
-            server[name_server] = ip_server
-            return update('settings', 'server', server)
-         
-    def get_server(self):
-        "Retorna todos os servers"
-        settings = get('settings')
+    def __init__(self, data):
+        self.data = data
 
-        if 'server' in settings:
-            return settings['server']
+    def update(self, name_server: str, ip_server: str):
+        if 'server' in self.data:
+            self.data['server'][name_server] = ip_server
         else:
+            self.data['server'] = {name_server:ip_server}
+
+    def delete(self, name_server : str):
+        try:
+            del self.data['server'][name_server]
+            return True
+        except:
             return False
 
-    def update_server(self, name_server : str, ip_server : str):
-        "Atualiza um server"
-        settings = get('settings')
-        
-        if False != settings:
-            settings['server'][name_server] = ip_server
-            return update('settings', 'server', settings['server'])
+class _Login():
+    def __init__(self, data):
+        self.data = data
 
-        
-    def deletar_server(self, name_server : str):
-        "Deleta um server"
-        settings = get('settings')
-        
-        if False != settings:
-            try:
-                del settings['server'][name_server]
-                return update('settings', 'server', settings['server'])
-            except:
-                return False
-        
+    def update(self, user: str, password: str):
+        if 'login' in self.data:
+            self.data['login'][user] = password
+        else:
+            self.data['login'] = {user:password}
+
+    def delete(self, user : str):
+        try:
+            del self.data['login'][user]
+            return True
+        except:
+            return False
 
 class _Simulation():
-    def get_status(self):
+    def __init__(self, data):
+        self.data = data
 
-        settings = get('settings')
-
-        if 'simulation' in settings:
-            return settings['simulation']
-        else:
-            return update('settings', 'simulation', True)
-    
     def true(self):
-        return update('settings', 'simulation', True)
+        self.data['simulation'] = True
     
     def false(self):
-        return update('settings', 'simulation', False)
+        self.data['simulation'] = False
+
 
 class Settings():
     def __init__(self):
-        self.server = _Server()
-        self.login = _Login()
-        self.simulation = _Simulation()
+        self.data = {}
+        self.NAME_DIC = 'settings'
+        self.server = _Server(self.data)
+        self.login = _Login(self.data)
+        self.simulation = _Simulation(self.data)
+
+
+    def save(self):
+        dic = Dictionary()
+        return dic.save( self.data, self.NAME_DIC )
+    
+    def load(self):
+        dic = Dictionary()
+        self.data = dic.get( self.NAME_DIC )
+        if self.data == False:
+            return False
+        else:
+            return True
+
+
+
+
+
+
+
 
     

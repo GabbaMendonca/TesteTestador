@@ -1,5 +1,9 @@
 from settings import Settings
 
+LOGIN = 0
+SERVER = 1
+SIMULATION = 2
+
 def carregar_dados():
 
     settings = Settings()
@@ -28,3 +32,7 @@ def carregar_dados():
     simulation = settings.simulation.get_status()
 
     return login, server, simulation
+
+
+
+

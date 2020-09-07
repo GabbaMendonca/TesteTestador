@@ -1,15 +1,18 @@
 import controller
-from settings import Server, Login
+from settings import Settings
 
 data = {}
 keys = {}
 
-data['simulation'] = False
+data['simulation'] = True
 data['terminal_status'] = False
 
 
 
 def terminal_start(num_key_login, num_key_server):
+
+    
+
     ip = data['server'][keys['server'][0]]
     user = keys['login'][0]
     senha = data['login'][user]
@@ -44,33 +47,37 @@ def telnet_ip():
             
             
 def carregar_dados():
+
+    settings = Settings()
+
     # ----- CARREGANDO/REGISTARNDO SERVER -----    
     
-    server = Server()
-    data['server'] = server.get_server()
-    
-    if not data['server']:
+    server = settings.server.get_server()
+
+    if not server:
         ip = input('IP do Server : ')
-        server.new_server('1', ip)
-        data['server'] = server.get_server()
+        settings.server.new_server('1', ip)
+        server = settings.server.get_server()
         
 
     # ----- CARREGANDO/REGISTARNDO LOGIN -----
 
-    login = Login()
-    data['login'] = login.get_login()
+    login = settings.login.get_login()
 
-    if not data['login']:
-        user = input('User : ')
+    if not login:
+        user = input('Usuario : ')
         senha = input('Senha : ')
-        login.new_login(user, senha)
-        data['login'] = login.get_login()
+        settings.login.new_login(user, senha)
+        login = settings.login.get_login()
+
+
+    return login, server
         
-    keys['server'] = list(data['server'])
-    keys['login'] = list(data['login'])
+    # keys['server'] = list(data['server'])
+    # keys['login'] = list(data['login'])
         
-    data['login_select'] = keys['login'][0] #TODO : caregar do arquivo de configurações
-    data['server_select'] = keys['server'][0] #TODO : caregar do arquivo de configurações
+    # data['login_select'] = keys['login'][0] #TODO : caregar do arquivo de configurações
+    # data['server_select'] = keys['server'][0] #TODO : caregar do arquivo de configurações
 
 
 def server():

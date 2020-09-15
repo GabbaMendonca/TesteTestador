@@ -95,6 +95,11 @@ class MyTest(unittest.TestCase):
         s.save()
         d = Dictionary()
         self.assertEqual( d.get('teste_settings'), {'server':{ '1':'0.0.0.0'}, 'login':{'usuario':'senha'}, 'simulation':True} )
+        
+        s.NAME_DIC = 'abc'
+        self.assertFalse(s.load())
+
+        print(s)
 
 if __name__ == '__main__':
     unittest.main()

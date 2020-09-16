@@ -8,10 +8,17 @@ def _novo_login():
     senha = input('Senha : ')
     return user, senha
 
-def carregar_dados():
 
+
+def carregar_dados():
+    """
+    Carregar os dados.
+
+    Da o comando load da classe Settings.
+    Se retornar False, pede os dados de server, login e senha.
+    """
+    
     settings = Settings()
-    print('Data Antes : ', settings.data)
 
     if False == settings.load():
         ip = _novo_server()
@@ -22,5 +29,3 @@ def carregar_dados():
 
         if not settings.save():
             return 'Não salvou !'
-            
-    print('Data Depois : ', settings.data)

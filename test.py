@@ -101,15 +101,5 @@ class MyTest(unittest.TestCase):
         s.NAME_DIC = 'abc'
         self.assertFalse(s.load())
 
-    """
-    Carrega os dados.
-    Se não tiver server, registra server.
-    Se não tiver login, registra login.
-    """
-    
-    def test_iniciar(self):
-        ...
-        
-
 if __name__ == '__main__':
     unittest.main()

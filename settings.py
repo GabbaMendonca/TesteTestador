@@ -3,6 +3,9 @@ from dictionary import Dictionary
 from time import sleep
 
 class _Server():
+    """
+    Manipula as confugurações do para acesso do server.
+    """
     def __init__(self, data):
         self.data = data
 
@@ -20,6 +23,9 @@ class _Server():
             return False
 
 class _Login():
+    """
+    Manipula as confugurações do para acesso do login.
+    """
     def __init__(self, data):
         self.data = data
 
@@ -37,6 +43,9 @@ class _Login():
             return False
 
 class _Simulation():
+    """
+    Habilita ou desabilita a simulação do router.
+    """
     def __init__(self, data):
         self.data = data
 
@@ -48,6 +57,10 @@ class _Simulation():
 
 
 class Settings():
+    """
+    Manipula do dados de configuração que
+    posteriormente serão gravados no dicionario.
+    """
     def __init__(self):
         self.data = {}
         self.NAME_DIC = 'settings'
@@ -58,14 +71,18 @@ class Settings():
 
     def save(self):
         """
-        :return: True or False
+        Salva os dados do dicionario em um arquivo .txt
+        
+        :return: True ou False
         """
         dic = Dictionary()
         return dic.save( self.data, self.NAME_DIC )
     
     def load(self):
         """
-        :return: True or False
+        Carrega os dados do .txt 
+
+        :return: True ou False
         """
         dic = Dictionary()
         if False == dic.get( self.NAME_DIC ):

@@ -57,21 +57,19 @@ class Settings():
 
 
     def save(self):
+        """
+        :return: True or False
+        """
         dic = Dictionary()
         return dic.save( self.data, self.NAME_DIC )
     
     def load(self):
+        """
+        :return: True or False
+        """
         dic = Dictionary()
-        self.data = dic.get( self.NAME_DIC )
-        if self.data == False:
+        if False == dic.get( self.NAME_DIC ):
             return False
         else:
+            self.data = dic.get( self.NAME_DIC )
             return True
-
-
-
-
-
-
-
-    

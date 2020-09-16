@@ -1,46 +1,26 @@
 from settings import Settings
 
-LOGIN = 0
-SERVER = 1
-SIMULATION = 2
+def _novo_server():
+    return input('IP do Server : ')
+
+def _novo_login():
+    user = input('Usuario : ')
+    senha = input('Senha : ')
+    return user, senha
 
 def carregar_dados():
 
     settings = Settings()
-    
-    if not settings.load():
-        return False
-    
-    if 'server' in settings.data:
-        ...
-    
-    if 'login' in settings.data:
-        ...
+    print('Data Antes : ', settings.data)
 
-    # # ----- CARREGANDO/REGISTARNDO SERVER -----    
-    
+    if False == settings.load():
+        ip = _novo_server()
+        settings.server.update('1', ip)
 
-    # if not server:
-    #     ip = input('IP do Server : ')
-    #     settings.server.new_server('1', ip)
-    #     server = settings.server.get_server()
-        
-    # # ----- CARREGANDO/REGISTARNDO LOGIN -----
+        user, senha = _novo_login()
+        settings.login.update(user, senha)
 
-    # login = settings.login.get_login()
-
-    # if not login:
-    #     user = input('Usuario : ')
-    #     senha = input('Senha : ')
-    #     settings.login.new_login(user, senha)
-    #     login = settings.login.get_login()
-
-    # # ----- CARREGANDO STATUS SIMULAÇÃO -----
-
-    # simulation = settings.simulation.get_status()
-
-    # return login, server, simulation
-
-
-
-
+        if not settings.save():
+            return 'Não salvou !'
+            
+    print('Data Depois : ', settings.data)

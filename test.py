@@ -95,11 +95,21 @@ class MyTest(unittest.TestCase):
         s.save()
         d = Dictionary()
         self.assertEqual( d.get('teste_settings'), {'server':{ '1':'0.0.0.0'}, 'login':{'usuario':'senha'}, 'simulation':True} )
+        s.load()
+        self.assertEqual( s.data, {'server':{ '1':'0.0.0.0'}, 'login':{'usuario':'senha'}, 'simulation':True} )
         
         s.NAME_DIC = 'abc'
         self.assertFalse(s.load())
 
-        print(s)
+    """
+    Carrega os dados.
+    Se não tiver server, registra server.
+    Se não tiver login, registra login.
+    """
+    
+    def test_iniciar(self):
+        ...
+        
 
 if __name__ == '__main__':
     unittest.main()

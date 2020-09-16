@@ -1,14 +1,5 @@
 from settings import Settings
-
-def _novo_server():
-    return input('IP do Server : ')
-
-def _novo_login():
-    user = input('Usuario : ')
-    senha = input('Senha : ')
-    return user, senha
-
-
+from view import ViewSettings as view
 
 def carregar_dados():
     """
@@ -21,11 +12,14 @@ def carregar_dados():
     settings = Settings()
 
     if False == settings.load():
-        ip = _novo_server()
+
+        ip = view.novo_server()
         settings.server.update('1', ip)
 
-        user, senha = _novo_login()
+        user, senha = view.novo_login()
         settings.login.update(user, senha)
 
         if not settings.save():
-            return 'Não salvou !'
+            return False
+
+    return settings.data

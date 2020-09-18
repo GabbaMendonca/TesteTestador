@@ -21,20 +21,20 @@ class MyTest(unittest.TestCase):
         d = Dictionary()
         self.assertEqual( d.get('teste_settings'), {} )
 
-        s.data = {'teste':'123'}
+        s.set({'teste':'123'})
         s.save()
         self.assertEqual( d.get('teste_settings'), {'teste':'123'} )
         self.assertTrue( s.load() )
-        self.assertEqual( s.data, {'teste':'123'} )
+        self.assertEqual( s.get(), {'teste':'123'} )
 
         
     def test_settings_server(self):
         
         s = Settings()
         s.server.update('1','0.0.0.0')
-        self.assertEqual( s.data, {'server':{ '1':'0.0.0.0'}} )
+        self.assertEqual( s.get(), {'server':{ '1':'0.0.0.0'}} )
         s.server.update('2','0.0.0.1')
-        self.assertEqual( s.data, {'server':{ '1':'0.0.0.0', '2':'0.0.0.1' }} )
+        self.assertEqual( s.get(), {'server':{ '1':'0.0.0.0', '2':'0.0.0.1' }} )
         
         s.NAME_DIC = 'teste_settings'
         s.save()
@@ -43,14 +43,14 @@ class MyTest(unittest.TestCase):
         self.assertEqual( d.get('teste_settings'), {'server':{ '1':'0.0.0.0', '2':'0.0.0.1' }} )
 
         s.server.update('2','0.0.1.1')
-        self.assertEqual( s.data, {'server':{ '1':'0.0.0.0', '2':'0.0.1.1' }} )
+        self.assertEqual( s.get(), {'server':{ '1':'0.0.0.0', '2':'0.0.1.1' }} )
         
         s.save()
         self.assertEqual( d.get('teste_settings'), {'server':{ '1':'0.0.0.0', '2':'0.0.1.1' }} )
 
         self.assertFalse(s.server.delete('0'))
         self.assertTrue(s.server.delete('2'))
-        self.assertEqual( s.data, {'server':{ '1':'0.0.0.0'}} )
+        self.assertEqual( s.get(), {'server':{ '1':'0.0.0.0'}} )
 
         s.save()
         self.assertEqual( d.get('teste_settings'), {'server':{ '1':'0.0.0.0'}} )
@@ -60,14 +60,14 @@ class MyTest(unittest.TestCase):
 
         s = Settings()
         s.login.update('usuario','senha')
-        self.assertEqual( s.data, {'login':{'usuario':'senha'}} )
+        self.assertEqual( s.get(), {'login':{'usuario':'senha'}} )
         s.login.update('user','pass')
-        self.assertEqual( s.data, {'login':{'usuario':'senha','user':'pass'}} )
+        self.assertEqual( s.get(), {'login':{'usuario':'senha','user':'pass'}} )
         s.login.update('user','minha_senha')
-        self.assertEqual( s.data, {'login':{'usuario':'senha','user':'minha_senha'}} )
+        self.assertEqual( s.get(), {'login':{'usuario':'senha','user':'minha_senha'}} )
         self.assertFalse(s.login.delete('teste'))
         self.assertTrue(s.login.delete('user'))
-        self.assertEqual( s.data, {'login':{'usuario':'senha'}} )
+        self.assertEqual( s.get(), {'login':{'usuario':'senha'}} )
         
 
         s.NAME_DIC = 'teste_settings'
@@ -79,9 +79,9 @@ class MyTest(unittest.TestCase):
         
         s = Settings()
         s.simulation.true()
-        self.assertEqual( s.data, {'simulation':True} )
+        self.assertEqual( s.get(), {'simulation':True} )
         s.simulation.false()
-        self.assertEqual( s.data, {'simulation':False} )
+        self.assertEqual( s.get(), {'simulation':False} )
 
     def test_settings(self):
         
@@ -89,14 +89,26 @@ class MyTest(unittest.TestCase):
         s.server.update('1','0.0.0.0')
         s.login.update('usuario','senha')
         s.simulation.true()
-        self.assertEqual( s.data, {'server':{ '1':'0.0.0.0'}, 'login':{'usuario':'senha'}, 'simulation':True} )
+        self.assertEqual( s.get(), {'server':{ '1':'0.0.0.0'}, 'login':{'usuario':'senha'}, 'simulation':True} )
 
         s.NAME_DIC = 'teste_settings'
         s.save()
         d = Dictionary()
         self.assertEqual( d.get('teste_settings'), {'server':{ '1':'0.0.0.0'}, 'login':{'usuario':'senha'}, 'simulation':True} )
         s.load()
-        self.assertEqual( s.data, {'server':{ '1':'0.0.0.0'}, 'login':{'usuario':'senha'}, 'simulation':True} )
+        self.assertEqual( s.get(), {'server':{ '1':'0.0.0.0'}, 'login':{'usuario':'senha'}, 'simulation':True} )
+
+        import pdb; pdb.set_trace()
+        s.server.update('1','0.0.1.1')
+        s.login.update('usuario','senha2')
+        s.simulation.false()
+
+        s.save()
+        d = Dictionary()
+        self.assertEqual( d.get('teste_settings'), {'server':{ '1':'0.0.1.1'}, 'login':{'usuario':'senha2'}, 'simulation':False} )
+        s.load()
+        self.assertEqual( d.get('teste_settings'), {'server':{ '1':'0.0.1.1'}, 'login':{'usuario':'senha2'}, 'simulation':False} )
+
         
         s.NAME_DIC = 'abc'
         self.assertFalse(s.load())

@@ -1,7 +1,7 @@
 from settings import Settings
 from view import ViewSettings as view
 
-def carregar_dados():
+def iniciar():
     """
     Carregar os dados.
 
@@ -19,7 +19,32 @@ def carregar_dados():
         user, senha = view.novo_login()
         settings.login.update(user, senha)
 
+        settings.simulation.true()
+
         if not settings.save():
             return False
 
-    return settings.data
+    return settings.get()
+
+def simulation():
+    settings = Settings()
+
+    print(settings._data)
+    settings.load()
+    print(settings._data)
+
+    while True:
+        opc = view.simulation()
+
+        if opc == '1':
+            settings.simulation.true()
+            break
+        if opc == '2':
+            settings.simulation.false()
+            break
+        if opc == '0':
+            return
+
+    print(settings._data)
+    settings.save()
+    return settings.get()

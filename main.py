@@ -2,12 +2,6 @@ import controller
 from settings import Settings
 
 data = {}
-keys = {}
-
-data['simulation'] = True
-data['terminal_status'] = False
-
-
 
 def terminal_start(num_key_login, num_key_server):
 
